@@ -16,6 +16,11 @@ public class RetrofitClient {
     private int serverPort;
     private static RetrofitClient instance;
     public String baseUrl;
+
+    public Retrofit getRetrofit() {
+        return retrofit;
+    }
+
     private RetrofitClient(){
         this.serverIp = FileHelper.GetConfigValue("SERVER_IP");
         this.serverPort = Integer.parseInt(FileHelper.GetConfigValue("SERVER_PORT"));

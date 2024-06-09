@@ -10,9 +10,13 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.hotel_customer.R;
+import com.example.hotel_customer.controller.InforBookingController;
+import com.example.hotel_customer.controller.base.BaseController;
 import com.example.hotel_customer.databinding.ActivityInfoBookingBinding;
+import com.example.hotel_customer.model.HotelItemData;
+import com.example.hotel_customer.view.base.BaseActivity;
 
-public class InfoBookingActivity extends AppCompatActivity {
+public class InfoBookingActivity extends BaseActivity<InforBookingController> {
     ActivityInfoBookingBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +29,7 @@ public class InfoBookingActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        
+        this.controller = new InforBookingController(this);
         setEvent();
     }
 
@@ -36,6 +40,8 @@ public class InfoBookingActivity extends AppCompatActivity {
     }
 
     private void handleBooking() {
+        HotelItemData hotelItemData = new HotelItemData();
+        this.controller.CreateBooking(hotelItemData);
         Intent booking = new Intent(this, BookingActivity.class);
         startActivity(booking);
     }

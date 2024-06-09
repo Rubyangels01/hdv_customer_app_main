@@ -11,15 +11,17 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.hotel_customer.R;
 import com.example.hotel_customer.adapter.PhotoAdapter;
+import com.example.hotel_customer.controller.HotelController;
 import com.example.hotel_customer.databinding.ActivityHotelBinding;
 import com.example.hotel_customer.helper.FileHelper;
 import com.example.hotel_customer.remote.data.Photo;
+import com.example.hotel_customer.view.base.BaseActivity;
 import com.example.hotel_customer.view.booking.ChooseBookingActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HotelActivity extends AppCompatActivity {
+public class HotelActivity extends BaseActivity {
     ActivityHotelBinding binding;
     PhotoAdapter photoAdapter;
     @Override

@@ -13,4 +13,16 @@ public class ResData {
     int code;
     String message;
     Object data;
+
+    public int getCode() {
+        return code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public Object getData() {
+        return data;
+    }
 }

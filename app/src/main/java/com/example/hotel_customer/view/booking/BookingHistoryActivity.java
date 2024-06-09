@@ -17,6 +17,7 @@ import com.example.hotel_customer.adapter.SpinnerAdapter;
 import com.example.hotel_customer.databinding.ActivityBookingHistoryBinding;
 import com.example.hotel_customer.model.AdapterModel;
 import com.example.hotel_customer.model.BookingStatus;
+import com.example.hotel_customer.remote.data.RoomClass;
 import com.example.hotel_customer.view.base.BaseActivity;
 
 import java.util.ArrayList;
@@ -62,4 +63,23 @@ public class BookingHistoryActivity extends BaseActivity {
             startActivity(booking);
         });
     }
+//    public void listRoomClass(Object list) {
+//        if (list instanceof List<?>) {
+//            try {
+//                List<?> genericList = (List<?>) list;
+//                for (Object item : genericList) {
+//                    if (item instanceof RoomClass) {
+//                        roomClasses.add((RoomClass) item);
+//                    } else {
+//                        throw new IllegalArgumentException("The list contains an item that is not of type RoomClass.");
+//                    }
+//                }
+//            } catch (ClassCastException e) {
+//                throw new IllegalArgumentException("The provided object is not a list of RoomClass objects.", e);
+//            }
+//        } else {
+//            throw new IllegalArgumentException("The provided object is not a list.");
+//        }
+//
+//    }
 }

@@ -1,25 +1,27 @@
 package com.example.hotel_customer.controller;
 
 import com.example.hotel_customer.controller.base.BaseController;
+import com.example.hotel_customer.model.HotelItemData;
 import com.example.hotel_customer.model.ResData;
-import com.example.hotel_customer.remote.repositories.BookingHistoryRepositoryImpl;
 import com.example.hotel_customer.remote.repositories.BookingRepositoryImpl;
-import com.example.hotel_customer.view.booking.BookingHistoryActivity;
+import com.example.hotel_customer.remote.repositories.HotelRepositoryImpl;
+import com.example.hotel_customer.view.booking.ChooseBookingActivity;
 import com.example.hotel_customer.view.booking.InfoBookingActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BookingHistoryController extends BaseController<BookingHistoryActivity, BookingRepositoryImpl> {
-    public BookingHistoryController(BookingHistoryActivity view)
+public class InforBookingController extends BaseController<InfoBookingActivity, BookingRepositoryImpl> {
+
+    public InforBookingController(InfoBookingActivity view)
     {
         this.view = view;
         this.repository = new BookingRepositoryImpl();
     }
-    public void GetListHistoryBooking(int idUser, int status)
+    public void CreateBooking(HotelItemData hotelItemData)
     {
-        this.repository.getHistoryBooking(idUser, status, new Callback<ResData>() {
+        this.repository.Booking(hotelItemData, new Callback<ResData>() {
             @Override
             public void onResponse(Call<ResData> call, Response<ResData> response) {
                 try{

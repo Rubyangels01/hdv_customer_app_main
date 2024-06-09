@@ -40,7 +40,7 @@
             android:name=".view.booking.InfoBookingActivity"
             android:exported="true" />
         <activity
-            android:name=".view.booking.ChooseBookingActivity"
+            android:name=".MainActivity"
             android:exported="true" />
         <activity
             android:name=".view.hotel.HotelActivity"
@@ -61,7 +61,7 @@
             android:name=".view.UserActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".view.booking.ChooseBookingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
