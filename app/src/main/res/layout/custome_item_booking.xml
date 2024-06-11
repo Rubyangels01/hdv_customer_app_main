@@ -22,7 +22,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1" />
+            android:text="1"
+            android:id="@+id/tv_id"/>
 
     </LinearLayout>
 
@@ -42,7 +43,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="chưa thanh toán" />
+            android:text="chưa thanh toán"
+            android:id="@+id/tv_status"/>
 
     </LinearLayout>
 
@@ -66,7 +68,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="18/11/2002" />
+                android:text="18/11/2002"
+                android:id="@+id/tv_checkin"/>
 
         </LinearLayout>
 
@@ -84,7 +87,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="18/11/2002" />
+                android:text="18/11/2002"
+                android:id="@+id/tv_checkout"/>
 
         </LinearLayout>
     </LinearLayout>
@@ -107,6 +111,7 @@
                 android:textColor="@color/white"
                 android:text="chi tiết"
                 android:layout_marginRight="20dp"
+                android:id="@+id/btndetail"
                 />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -115,6 +120,7 @@
                 android:background="@drawable/bg_fill_rounded_red"
                 android:textColor="@color/white"
                 android:text="hủy"
+                android:id="@+id/btncancle"
                 />
 
         </LinearLayout>

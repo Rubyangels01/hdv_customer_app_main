@@ -49,17 +49,17 @@
                 android:padding="10dp"
                 android:orientation="vertical">
 
-                <include layout="@layout/custome_item_booking" />
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lvhistory"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hello"
+                    android:id="@+id/tv"/>
 
-                <include layout="@layout/custome_item_booking" />
 
-                <include layout="@layout/custome_item_booking" />
-
-                <include layout="@layout/custome_item_booking" />
-
-                <include layout="@layout/custome_item_booking" />
-
-                <include layout="@layout/custome_item_booking" />
 
             </LinearLayout>
         </ScrollView>

@@ -21,6 +21,13 @@ public interface BookingService {
             @Query("status") int bookingStatus
     );
 
+    @GET("/users/{idUser}/bookings")
+    public Call<ResData> getHistoryBooking2(
+            @Path("idUser") int idUser,
+            @Query("status") int bookingStatus
+    );
+
+
 
     @GET("/bookings/{idBooking}")
     public Call<ResData> getBookingByID(@Path("idBooking") int idBooking);

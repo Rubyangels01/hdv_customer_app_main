@@ -10,4 +10,5 @@ import retrofit2.http.POST;
 public interface UserService {
     @POST("/accounts")
     public Call<ResData> createAccount(@Body Account account);
+
 }

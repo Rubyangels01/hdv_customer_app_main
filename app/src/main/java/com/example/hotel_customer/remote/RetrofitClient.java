@@ -24,7 +24,7 @@ public class RetrofitClient {
     private RetrofitClient(){
         this.serverIp = FileHelper.GetConfigValue("SERVER_IP");
         this.serverPort = Integer.parseInt(FileHelper.GetConfigValue("SERVER_PORT"));
-        this.baseUrl = String.format("http://%s:%d", this.serverIp, this.serverPort);
+        this.baseUrl = String.format("http://%s:%d","127.0.0.1", 3002);
         this.retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
     }
     public static RetrofitClient gI(){

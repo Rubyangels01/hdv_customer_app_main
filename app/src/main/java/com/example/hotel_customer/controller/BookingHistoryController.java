@@ -1,5 +1,7 @@
 package com.example.hotel_customer.controller;
 
+import android.widget.Toast;
+
 import com.example.hotel_customer.controller.base.BaseController;
 import com.example.hotel_customer.model.ResData;
 import com.example.hotel_customer.remote.repositories.BookingHistoryRepositoryImpl;
@@ -17,25 +19,34 @@ public class BookingHistoryController extends BaseController<BookingHistoryActiv
         this.view = view;
         this.repository = new BookingRepositoryImpl();
     }
+    public static int code = 0;
     public void GetListHistoryBooking(int idUser, int status)
     {
-        this.repository.getHistoryBooking(idUser, status, new Callback<ResData>() {
+        code =1;
+        this.repository.getHistoryBooking2(idUser, status, new Callback<ResData>() {
+
             @Override
             public void onResponse(Call<ResData> call, Response<ResData> response) {
                 try{
+                    code = 2;
                     if(response.isSuccessful())
                     {
+                        code =3;
                         ResData resData = response.body();
                         if(resData.getCode() == 200 || resData.getCode() == 201)
                         {
-                            view.showNotifyDialog("Đặt phòng thành công");
+                            code =4;
+                             code = resData.getCode();
+//                            view.SetAdapter(view.ConvertList(resData.getData()));
                         }else
                         {
+                            code = 5;
                             throw new Exception(resData.getMessage());
                         }
                     }
                     else
                     {
+                        code = 6;
                         throw new Exception("Đặt phòng thất bại!");
                     }
 
@@ -43,8 +54,10 @@ public class BookingHistoryController extends BaseController<BookingHistoryActiv
 
                 {
                     try {
+                        code = 7;
                         throw new Exception(ex.getMessage());
                     } catch (Exception e) {
+                        code = 8;
                         throw new RuntimeException(e);
                     }
                 }
@@ -52,8 +65,12 @@ public class BookingHistoryController extends BaseController<BookingHistoryActiv
 
             @Override
             public void onFailure(Call<ResData> call, Throwable t) {
-
+                code = 9;
             }
         });
+    }
+    public int getMa()
+    {
+        return code;
     }
 }

@@ -34,7 +34,7 @@
             android:name=".view.account.ProfileActivity"
             android:exported="true" />
         <activity
-            android:name=".view.booking.BookingHistoryActivity"
+            android:name=".view.booking.ChooseBookingActivity"
             android:exported="true" />
         <activity
             android:name=".view.booking.InfoBookingActivity"
@@ -61,7 +61,7 @@
             android:name=".view.UserActivity"
             android:exported="true" />
         <activity
-            android:name=".view.booking.ChooseBookingActivity"
+            android:name=".view.booking.BookingHistoryActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

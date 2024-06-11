@@ -29,6 +29,11 @@ public class BookingRepositoryImpl implements Repository {
     {
         bookingService.getBookingByID(idBooking).enqueue(callback);
     }
+    public void getHistoryBooking2(int IdUser,int status, Callback<ResData> callback)
+    {
+
+        bookingService.getHistoryBooking2(IdUser,status).enqueue(callback);
+    }
 
 
 }
