@@ -9,50 +9,50 @@ import com.example.hotel_customer.remote.repositories.BookingRepositoryImpl;
 import com.example.hotel_customer.view.booking.BookingHistoryActivity;
 import com.example.hotel_customer.view.booking.InfoBookingActivity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class BookingHistoryController extends BaseController<BookingHistoryActivity, BookingRepositoryImpl> {
-    public BookingHistoryController(BookingHistoryActivity view)
-    {
+    public BookingHistoryController(BookingHistoryActivity view) {
         this.view = view;
         this.repository = new BookingRepositoryImpl();
     }
+
     public static int code = 0;
-    public void GetListHistoryBooking(int idUser, int status)
-    {
-        code =1;
+    public static Object name = null;
+
+    public void GetListHistoryBooking(int idUser, int status) {
+
         this.repository.getHistoryBooking2(idUser, status, new Callback<ResData>() {
 
             @Override
             public void onResponse(Call<ResData> call, Response<ResData> response) {
-                try{
+                try {
                     code = 2;
-                    if(response.isSuccessful())
-                    {
-                        code =3;
+                    if (response.isSuccessful()) {
+                        code = 3;
                         ResData resData = response.body();
-                        if(resData.getCode() == 200 || resData.getCode() == 201)
-                        {
-                            code =4;
-                             code = resData.getCode();
-//                            view.SetAdapter(view.ConvertList(resData.getData()));
-                        }else
-                        {
+                        if (resData.getCode() == 200 || resData.getCode() == 201) {
+                            code = 4;
+                            code = resData.getCode();
+                            name = resData.getData();
+//                            view.showNotifyDialog(view.ConvertList(resData.getData()).get(0).getPersonName());
+                            view.SetAdapter(view.ConvertList(resData.getData()));
+                        } else {
                             code = 5;
                             throw new Exception(resData.getMessage());
                         }
-                    }
-                    else
-                    {
+                    } else {
                         code = 6;
                         throw new Exception("Đặt phòng thất bại!");
                     }
 
-                }catch (Exception ex)
-
-                {
+                } catch (Exception ex) {
                     try {
                         code = 7;
                         throw new Exception(ex.getMessage());
@@ -69,8 +69,13 @@ public class BookingHistoryController extends BaseController<BookingHistoryActiv
             }
         });
     }
-    public int getMa()
-    {
+
+    public Object getMa() {
         return code;
     }
+
+    public Object getObject() {
+        return name;
+    }
 }
+

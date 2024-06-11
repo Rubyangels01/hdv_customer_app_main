@@ -24,7 +24,7 @@ public interface BookingService {
     @GET("/users/{idUser}/bookings")
     public Call<ResData> getHistoryBooking2(
             @Path("idUser") int idUser,
-            @Query("status") int bookingStatus
+            @Query("status") int status
     );
 
 

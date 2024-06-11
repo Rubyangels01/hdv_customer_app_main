@@ -25,9 +25,14 @@ import com.example.hotel_customer.model.BookingItem;
 import com.example.hotel_customer.model.BookingStatus;
 import com.example.hotel_customer.remote.data.RoomClass;
 import com.example.hotel_customer.view.base.BaseActivity;
+import com.google.gson.internal.LinkedTreeMap;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class BookingHistoryActivity extends BaseActivity<BookingHistoryController> {
     ActivityBookingHistoryBinding binding;
@@ -49,8 +54,7 @@ public class BookingHistoryActivity extends BaseActivity<BookingHistoryControlle
             return insets;
         });
         listbooking = new ArrayList<>();
-        BookingItem b1 = new BookingItem(1, 1,"17/1/2024","19/1/2024");
-        listbooking.add(b1);
+
         this.controller = new BookingHistoryController(this);
         initUI();
         setEvent();
@@ -80,9 +84,7 @@ public class BookingHistoryActivity extends BaseActivity<BookingHistoryControlle
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 BookingStatus selectedStatus = (BookingStatus) parent.getItemAtPosition(position);
                 int selectedID = selectedStatus.getId();
-                Toast.makeText(BookingHistoryActivity.this, selectedID+"", Toast.LENGTH_SHORT).show();
-
-                HandlerSelectedStatus(1, 2);
+                HandlerSelectedStatus(1, 1);
             }
 
             @Override
@@ -93,10 +95,8 @@ public class BookingHistoryActivity extends BaseActivity<BookingHistoryControlle
     }
 
     private void HandlerSelectedStatus(int user, int status) {
-        this.controller.GetListHistoryBooking(1,1);
-        binding.tv.setText(this.controller.getMa() + "");
-//        bookingAdapter = new BookingAdapter(this, listbooking);
-//        binding.lvhistory.setAdapter(bookingAdapter);
+        this.controller.GetListHistoryBooking(user,status);
+        binding.tv.setText(Getdataa(this.controller.getObject()));
 
     }
 
@@ -107,25 +107,75 @@ public class BookingHistoryActivity extends BaseActivity<BookingHistoryControlle
     }
 
     public ArrayList<BookingItem> ConvertList(Object list) {
-
+        // Kiểm tra xem đối tượng "data" có phải là một danh sách không
         if (list instanceof List<?>) {
-            try {
-                List<?> genericList = (List<?>) list;
-                for (Object item : genericList) {
-                    if (item instanceof BookingItem) {
-                        listbooking.add((BookingItem) item);
-                    } else {
-                        throw new IllegalArgumentException("The list contains an item that is not of type RoomClass.");
-                    }
+            // Ép kiểu đối tượng "data" thành danh sách các đối tượng
+            List<?> dataList = (List<?>) list;
+
+            // Kiểm tra kiểu dữ liệu của mỗi phần tử trong danh sách
+            for (Object obj : dataList) {
+                if (obj instanceof Map<?, ?>) {
+                    // Chuyển đối tượng Map thành một đối tượng BookingItem
+                    Map<?, ?> dataMap = (Map<?, ?>) obj;
+
+                    // Tạo đối tượng BookingItem từ Map
+                    BookingItem bookingItem = new BookingItem();
+                    double idDouble = (Double) dataMap.get("id");
+                    int id = (int) idDouble;
+                    bookingItem.setId(id);
+                    bookingItem.setCheckin(convertDateString((String) (dataMap.get("checkin"))));
+                    bookingItem.setCheckout(convertDateString((String) dataMap.get("checkout")));
+                    bookingItem.setPersonName((String) dataMap.get("personName"));
+                    double status = (Double) dataMap.get("status");
+                    int status1 = (int) status;
+                    bookingItem.setId(status1);
+//                    bookingItem.setStatus((Integer) dataMap.get("status"));
+                    // Thiết lập các thuộc tính khác
+
+                    // Thêm đối tượng BookingItem vào danh sách
+                    listbooking.add(bookingItem);
                 }
-            } catch (ClassCastException e) {
-                throw new IllegalArgumentException("The provided object is not a list of RoomClass objects.", e);
             }
         } else {
-            throw new IllegalArgumentException("The provided object is not a list.");
+            // Xử lý trường hợp khác nếu đối tượng "data" không phải là một danh sách
         }
         return listbooking;
+
     }
+
+    public String Getdataa(Object ob)
+    {
+
+String name = "";
+        // In ra thông tin của từng đối tượng trong danh sách
+
+            if (ob instanceof BookingItem) {
+                name = ((BookingItem) ob).getPersonName();
+                Toast.makeText(this,  ((BookingItem) ob).getPersonName() + "", Toast.LENGTH_SHORT).show();
+
+            } else {
+                System.out.println("Không phải BookingItem");
+            }
+return name;
+    }
+
+    public  String convertDateString(String inputDateString) {
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = inputFormat.parse(inputDateString);
+            return outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+
+
+
+
 
 
 
